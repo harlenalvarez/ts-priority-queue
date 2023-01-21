@@ -16,13 +16,15 @@
     "dist"
   ],
   "repository": {
-    "url": "https://github.com/harlenalvarez/priority-queue",
+    "url": "https://github.com/harlenalvarez/ts-priority-queue",
     "type": "url"
   },
-  "homepage": "https://github.com/harlenalvarez/priority-queue",
+  "homepage": "https://github.com/harlenalvarez/ts-priority-queue",
   "keywords": [
-    "Priority Queue",
-    "Min Max Heap"
+    "typescript",
+    "javascript",
+    "priority queue",
+    "min/max heap"
   ],
   "scripts": {
     "build": "tsc && vite build",
