@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { PriorityQueue } from '../lib/PriorityQueue';
+import { PriorityQueue } from '../lib';
 
 describe('Priority Queue', () => {
   test('Should enqueue highest priority to lowest value', () => {
