@@ -1,0 +1,41 @@
+{
+  "name": "@practicaljs/priority-queue",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Javascript / Typescript priority queue ( max / min heap )",
+  "exports": {
+    ".": {
+      "import": "./dist/priority-queue.js",
+      "require": "./dist/priority-queue.umd.cjs"
+    }
+  },
+  "main": "dist/priority-queue.umd.cjs",
+  "module": "dist/priority-queue.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "url": "https://github.com/harlenalvarez/priority-queue",
+    "type": "url"
+  },
+  "homepage": "https://github.com/harlenalvarez/priority-queue",
+  "keywords": [
+    "Priority Queue",
+    "Min Max Heap"
+  ],
+  "scripts": {
+    "build": "tsc && vite build",
+    "prepack": "json -f package.json -I -e \"delete this.devDependencies; delete this.dependencies\"",
+    "postpublish": "git checkout ./package.json",
+    "test": "vitest run",
+    "test:w": "vitest"
+  },
+  "devDependencies": {
+    "json": "11.0.0",
+    "typescript": "^4.9.3",
+    "vite": "^4.0.0",
+    "vite-plugin-dts": "1.7.1",
+    "vitest": "^0.27.2"
+  }
+}
