@@ -111,7 +111,7 @@ You can also prioritize by secondary vaules
     const aRating = a.name.startsWith('Special') ? 0 : 2;
     const bRating = b.name.startsWith('Special') ? 0 : 2;
     if (aRating == bRating) {
-      // Here I want logest time first
+      // Here I want earliest time first
       return a.time - b.time
     }
     return aRating - bRating;
