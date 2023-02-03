@@ -1,6 +1,7 @@
 {
   "name": "@practicaljs/priority-queue",
-  "version": "0.1.2",
+  "version": "1.0.0",
+  "license": "MIT",
   "type": "module",
   "description": "Javascript / Typescript priority queue ( max / min heap )",
   "exports": {
