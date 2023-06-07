@@ -119,3 +119,27 @@ You can also prioritize by secondary vaules
 
   //[{ name: 'Special - House Music', time: 22 }, { name: 'Special - Live Music', time: 23 },  { name: 'breakfast', time: 7}...]
 ```
+
+You can also check and remove specific items if you provide a key to track
+
+```ts
+   const foodLikes = [
+      { name: 'sushi', rating: 4 },
+      { name: 'chicken', rating: 4 },
+      { name: 'beef', rating: 5 },
+      { name: 'pork', rating: 1 }
+    ];
+    // we'll track our objects by name ( this makes name unique )
+    const queue = new PriorityQueue<typeof foodLikes[0]>(
+      (a, b) => a.rating - b.rating,
+      // Method takes the item and must return a string
+      (item) => item.name
+    );
+    for (let food of foodLikes) {
+      queue.enqueue(food);
+    }
+    // you can check if an item exists ( only if the key method was provided )
+    if(queue.hasItem(foodLikes[3]))
+      const pork = queue.dequeueItem(foodLikes[3]);
+```
+> If you provide a key to track it will also check for uniqueness when enqueing items and ignore if the item you are adding already exists and it's comparison value is the same

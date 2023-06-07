@@ -174,4 +174,69 @@ describe('Priority Queue', () => {
     expect(dequeueValue).toMatchObject({ name: 'Special - Live Music', time: 23 });
     expect(queue.peek).toMatchObject({ name: 'morning cofee', time: 6 });
   });
+
+  test('Should enqueue and keep track of key', () => {
+    const foodLikes = [
+      { name: 'sushi', rating: 4 },
+      { name: 'chicken', rating: 4 },
+      { name: 'beef', rating: 5 },
+      { name: 'pork', rating: 1 }
+    ];
+    const queue = new PriorityQueue<typeof foodLikes[0]>((a, b) => a.rating - b.rating, (item) => item.name);
+    for (let food of foodLikes) {
+      queue.enqueue(food);
+    }
+
+    expect(queue.hasItem(foodLikes[3])).toBe(true)
+    expect((queue as any).keyTrack.size).toBe(foodLikes.length)
+    expect((queue as any).keyTrack.get(foodLikes[3].name)).toBe(0)
+    expect((queue as any).keyTrack.get(foodLikes[0].name)).toBe(1)
+    expect((queue as any).keyTrack.get(foodLikes[1].name)).toBe(3)
+    expect((queue as any).keyTrack.get(foodLikes[2].name)).toBe(2)
+
+    queue.dequeue()
+    expect(queue.hasItem(foodLikes[3])).toBe(false)
+    expect((queue as any).keyTrack.size).toBe(foodLikes.length - 1)
+    expect((queue as any).keyTrack.get(foodLikes[0].name)).toBe(0)
+    expect((queue as any).keyTrack.get(foodLikes[1].name)).toBe(1)
+    expect((queue as any).keyTrack.get(foodLikes[2].name)).toBe(2)
+  });
+
+  test('Should enqueue by item', () => {
+    const foodLikes = [
+      { name: 'sushi', rating: 4 },
+      { name: 'chicken', rating: 4 },
+      { name: 'beef', rating: 5 },
+      { name: 'pork', rating: 1 }
+    ];
+    const queue = new PriorityQueue<typeof foodLikes[0]>((a, b) => a.rating - b.rating, (item) => item.name);
+    for (let food of foodLikes) {
+      queue.enqueue(food);
+    }
+
+    const chicken = queue.dequeueItem(foodLikes[1]);
+    expect(chicken).not.toBeNull();
+    expect(chicken!.name).toBe('chicken');
+    expect(queue.hasItem(foodLikes[1])).toBe(false);
+    const pork = queue.dequeueItem(foodLikes[3]);
+    expect(pork).not.toBeNull();
+    expect(pork!.name).toBe('pork');
+    expect((queue as any).keyTrack.get(foodLikes[0].name)).toBe(0)
+  });
+
+  test('If has key should not duplicate values', () => {
+    const foodLikes = [
+      { name: 'sushi', rating: 4 },
+      { name: 'chicken', rating: 4 },
+      { name: 'beef', rating: 5 },
+      { name: 'pork', rating: 1 }
+    ];
+    const queue = new PriorityQueue<typeof foodLikes[0]>((a, b) => a.rating - b.rating, (item) => item.name);
+    for (let food of foodLikes) {
+      queue.enqueue(food);
+    }
+
+    queue.enqueue(foodLikes[3]);
+    expect(queue).toHaveLength(4);
+  });
 })
