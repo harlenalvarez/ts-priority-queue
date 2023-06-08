@@ -10,8 +10,8 @@ export class PriorityQueue<T> {
   private leftIndex = (index: number) => index * 2 + 1;
   private rightIndex = (index: number) => index * 2 + 2;
 
-  private heap: T[] = [];
   private getKey?: Key<T>;
+  private heap: T[] = [];
   private keyTrack = new Map<string, number>();
 
   compare: CompareTo<T>
@@ -117,5 +117,6 @@ export class PriorityQueue<T> {
 
   clear() {
     this.heap = [];
+    this.keyTrack.clear();
   }
 }
