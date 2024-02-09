@@ -239,4 +239,26 @@ describe('Priority Queue', () => {
     queue.enqueue(foodLikes[3]);
     expect(queue).toHaveLength(4);
   });
+
+  test('Should dequeue by key', () => {
+    const foodLikes = [
+      { name: 'sushi', rating: 4 },
+      { name: 'chicken', rating: 3 },
+      { name: 'crab', rating: 2 },
+      { name: 'beef', rating: 1 },
+      { name: 'pork', rating: 5 }
+    ];
+    const queue = new PriorityQueue<typeof foodLikes[0]>((a, b) => b.rating - a.rating, a => a.name);
+    for (let food of foodLikes) {
+      queue.enqueue(food);
+    }
+
+    const crab = queue.dequeueByKey('crab');
+    expect(crab).toMatchObject({ name: 'crab', rating: 2 });
+    expect(queue.length).toBe(4);
+    const pork = queue.dequeue();
+    expect(pork?.name).toBe('pork');
+    const sushi = queue.dequeue();
+    expect(sushi?.name).toBe('sushi');
+  });
 })

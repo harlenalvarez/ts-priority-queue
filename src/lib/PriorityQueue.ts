@@ -111,6 +111,12 @@ export class PriorityQueue<T> {
     return this.dequeueByIndex(index);
   }
 
+  dequeueByKey(key: string) {
+    const index = this.keyTrack.get(key);
+    if (index === undefined) return;
+    return this.dequeueByIndex(index);
+  }
+
   dequeue() {
     return this.dequeueByIndex(0);
   }
